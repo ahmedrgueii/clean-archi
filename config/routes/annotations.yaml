@@ -1,0 +1,3 @@
+user_controller:
+    resource: ../../src/User/UserInterface/Twig
+    type: attribute

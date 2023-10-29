@@ -30,5 +30,6 @@ docker-compose.override.yaml
 ###> ssl certificates for docker ###
 .docker/php/certs/*.crt
 .docker/php/certs/*.pem
+.docker/jwt
 ###< ssl certificates for docker ###
 
