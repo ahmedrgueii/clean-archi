@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+    mysql:
+        image: arm64v8/mysql:oracle
+
+    php:
+        environment:
+            NODE_EXTRA_CA_CERTS: /usr/lib/ssl/cert.pem
