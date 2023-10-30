@@ -3,4 +3,4 @@
 #### Installation
 `make init`
 #### Architecture
-![](./.docs/clen-archi.png)
+![Clean Architecture](./.docs/clean-archi.png)
