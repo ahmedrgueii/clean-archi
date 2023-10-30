@@ -29,7 +29,7 @@ final class UserProvider
             throw new NotFoundHttpException($exception->getMessage());
         }
 
-        $response = $this->view->render('user/show.html.twig', [
+        $response = $this->view->render('twig/user/show.html.twig', [
             'user' => UserResource::fromUserDTO($userDTO),
         ]);
 

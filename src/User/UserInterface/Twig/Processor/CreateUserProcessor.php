@@ -29,7 +29,7 @@ final class CreateUserProcessor
     ) {
     }
 
-    #[Route(path: '/app/users/create', name: 'app_user_processor_create', methods: ['GET', 'POST'])]
+    #[Route(path: '/app/users/create', name: 'app_user_processor_create', methods: ['GET', 'POST'], stateless: false)]
     public function __invoke(Request $request): Response
     {
         $form = $this->formFactory->create(UserFormType::class);
@@ -47,7 +47,7 @@ final class CreateUserProcessor
             );
         }
 
-        $response = $this->view->render('user/create.html.twig', [
+        $response = $this->view->render('twig/user/create.html.twig', [
             'form' => $form->createView(),
         ]);
 
