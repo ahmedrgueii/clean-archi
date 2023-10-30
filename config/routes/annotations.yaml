@@ -1,0 +1,7 @@
+user_controller:
+    resource: ../../src/User/UserInterface/Twig
+    type: attribute
+
+vue_controller:
+    resource: ../../src/User/UserInterface/Vue
+    type: attribute

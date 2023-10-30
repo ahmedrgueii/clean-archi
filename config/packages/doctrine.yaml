@@ -2,48 +2,47 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '15'
+        types:
+            # Common
+            datetime: App\Common\Infrastructure\Doctrine\Type\DateTimeType
+            firstname: App\Common\Infrastructure\Doctrine\Type\FirstNameType
+            lastname: App\Common\Infrastructure\Doctrine\Type\LastNameType
+            email: App\Common\Infrastructure\Doctrine\Type\EmailType
 
-        profiling_collect_backtrace: '%kernel.debug%'
+            # Authentication
+            username: App\Authentication\Infrastructure\Doctrine\Type\UsernameType
+            hashed_password: App\Authentication\Infrastructure\Doctrine\Type\HashedPasswordType
+
+            # User
+            user_id: App\User\Infrastructure\Doctrine\Type\UserIdType
+            user_status: App\User\Infrastructure\Doctrine\Type\UserStatusType
+
+            # Messaging
+            conversation_id: App\Messaging\Infrastructure\Doctrine\Type\ConversationIdType
+            participant_id: App\Messaging\Infrastructure\Doctrine\Type\ParticipantIdType
+            participant_name: App\Messaging\Infrastructure\Doctrine\Type\ParticipantNameType
+            message_id: App\Messaging\Infrastructure\Doctrine\Type\MessageIdType
+            message_content: App\Messaging\Infrastructure\Doctrine\Type\MessageContentType
+
     orm:
         auto_generate_proxy_classes: true
-        enable_lazy_ghost_objects: true
-        report_fields_where_declared: true
-        validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
-                type: attribute
+            Authentication:
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                type: xml
+                dir: '%kernel.project_dir%/src/Authentication/Infrastructure/Doctrine/Mapping'
+                prefix: 'App\Authentication\Domain\Entity'
 
-when@test:
-    doctrine:
-        dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            User:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/User/Infrastructure/Doctrine/Mapping'
+                prefix: 'App\User\Domain\Entity'
 
-when@prod:
-    doctrine:
-        orm:
-            auto_generate_proxy_classes: false
-            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
-            query_cache_driver:
-                type: pool
-                pool: doctrine.system_cache_pool
-            result_cache_driver:
-                type: pool
-                pool: doctrine.result_cache_pool
-
-    framework:
-        cache:
-            pools:
-                doctrine.result_cache_pool:
-                    adapter: cache.app
-                doctrine.system_cache_pool:
-                    adapter: cache.system
+            Messaging:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Messaging/Infrastructure/Doctrine/Mapping'
+                prefix: 'App\Messaging\Domain\Entity'

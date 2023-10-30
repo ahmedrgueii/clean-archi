@@ -3,19 +3,41 @@
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Ahmed RGUEI",
+            "email": "ahmedrgueii@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-openssl": "*",
+        "api-platform/core": "^3.2",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
+        "firebase/php-jwt": "^6.9",
+        "nelmio/cors-bundle": "^2.3",
+        "nesbot/carbon": "*",
+        "ramsey/uuid-doctrine": "^2.0",
+        "symfony/asset": "6.3.*",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2",
+        "symfony/form": "6.3.*",
         "symfony/framework-bundle": "6.3.*",
+        "symfony/messenger": "6.3.*",
+        "symfony/monolog-bundle": "*",
         "symfony/runtime": "6.3.*",
-        "symfony/yaml": "6.3.*"
+        "symfony/security-bundle": "6.3.*",
+        "symfony/string": "6.3.*",
+        "symfony/twig-bundle": "6.3.*",
+        "symfony/validator": "6.3.*",
+        "symfony/webpack-encore-bundle": "^2.1",
+        "symfony/yaml": "6.3.*",
+        "webmozart/assert": "^1.11"
     },
     "config": {
         "allow-plugins": {
@@ -64,5 +86,9 @@
             "allow-contrib": false,
             "require": "6.3.*"
         }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.51",
+        "symfony/web-profiler-bundle": "6.3.*"
     }
 }
