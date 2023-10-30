@@ -27,7 +27,7 @@ final class UsersProvider
 
         $users = $this->getUsersDTOs($page, $itemsPerPage);
 
-        $response = $this->view->render('user/list.html.twig', [
+        $response = $this->view->render('twig/user/list.html.twig', [
             'users' => $this->mapUserDTOsToUsersResources($users),
         ]);
 

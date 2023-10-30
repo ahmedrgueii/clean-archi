@@ -42,6 +42,10 @@ services:
         resource: '../src/User/UserInterface/Twig'
         tags: [ 'controller.service_arguments' ]
 
+    App\User\UserInterface\Vue\:
+        resource: '../src/User/UserInterface/Vue'
+        tags: [ 'controller.service_arguments' ]
+
     ######
     # Messaging
     ################################

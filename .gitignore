@@ -33,3 +33,10 @@ docker-compose.override.yaml
 .docker/jwt
 ###< ssl certificates for docker ###
 
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
