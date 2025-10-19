@@ -33,6 +33,11 @@ The Product module introduces catalogue management with the following building b
 
 Products can be renamed, repriced or have their stock adjusted while preserving invariants. The repository abstraction (`ProductRepository`) supports persistence-agnostic use cases, with the Doctrine adapter providing concrete database access. 【F:src/Product/Domain/Repository/ProductRepository.php†L1-L29】【F:src/Product/Infrastructure/Doctrine/Repository/DoctrineProductRepository.php†L1-L52】
 
+The module now exposes dedicated delivery mechanisms:
+
+- API Platform resources (`ProductResource`, providers/processors) offer REST endpoints to list, fetch and create catalogue entries while delegating business logic to the application layer. 【F:src/Product/UserInterface/ApiPlatform/Resource/ProductResource.php†L1-L78】【F:src/Product/UserInterface/ApiPlatform/Provider/ProductsProvider.php†L1-L54】【F:src/Product/UserInterface/ApiPlatform/Processor/CreateProductProcessor.php†L1-L38】
+- Twig controllers render HTML pages for operators to browse, inspect and create products, backed by Symfony forms. 【F:src/Product/UserInterface/Twig/Provider/ProductsProvider.php†L1-L46】【F:src/Product/UserInterface/Twig/Processor/CreateProductProcessor.php†L1-L62】【F:templates/twig/product/list.html.twig†L1-L31】
+
 ## New Order bounded context
 
 The Order module models the “passage commande” workflow:
@@ -42,6 +47,11 @@ The Order module models the “passage commande” workflow:
 - Infrastructure: Doctrine types (`order_id`, `order_status`, `quantity`, …) and XML mappings persist aggregates, while `DoctrineOrderRepository` implements the repository contract. 【F:src/Order/Infrastructure/Doctrine/Type/OrderIdType.php†L1-L11】【F:src/Order/Infrastructure/Doctrine/Type/QuantityType.php†L1-L45】【F:src/Order/Infrastructure/Doctrine/Mapping/Order.orm.xml†L1-L32】【F:src/Order/Infrastructure/Doctrine/Repository/DoctrineOrderRepository.php†L1-L37】
 
 Order placement uses the Product repository to fetch and reserve stock before aggregating `OrderItem` snapshots. Money amounts are stored as integer cents to avoid floating point issues and carry their ISO currency code.
+
+New presentation layers complement the ordering workflow:
+
+- API Platform resources publish read/write operations through `OrderResource`, including pagination-aware providers and a processor that wraps the `PlaceOrderCommand`. 【F:src/Order/UserInterface/ApiPlatform/Resource/OrderResource.php†L1-L83】【F:src/Order/UserInterface/ApiPlatform/Provider/OrdersProvider.php†L1-L46】【F:src/Order/UserInterface/ApiPlatform/Processor/CreateOrderProcessor.php†L1-L47】
+- Twig controllers power HTML pages to list orders, inspect a single order and submit new ones via collection-aware forms. 【F:src/Order/UserInterface/Twig/Provider/OrdersProvider.php†L1-L46】【F:src/Order/UserInterface/Twig/Processor/CreateOrderProcessor.php†L1-L67】【F:templates/twig/order/create.html.twig†L1-L9】
 
 ## Module interactions
 

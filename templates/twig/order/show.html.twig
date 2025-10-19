@@ -1,0 +1,48 @@
+{% extends 'twig/base.html.twig' %}
+
+{% block title %}Order {{ order.id }}{% endblock %}
+
+{% block body %}
+    <h1>Order {{ order.id }}</h1>
+
+    <dl>
+        <dt>Status</dt>
+        <dd>{{ order.status }}</dd>
+
+        <dt>Created at</dt>
+        <dd>{{ order.createdAt }}</dd>
+
+        <dt>Total</dt>
+        <dd>{{ order.totalAmount / 100 }} {{ order.totalCurrency }}</dd>
+    </dl>
+
+    <h2>Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in order.items %}
+            <tr>
+                <td>{{ item.productName }} ({{ item.productId }})</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unitPriceAmount / 100 }} {{ item.unitPriceCurrency }}</td>
+                <td>{{ item.subtotalAmount / 100 }} {{ item.unitPriceCurrency }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No items.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p>
+        <a href="{{ path('app_orders_provider') }}">Back to orders</a>
+    </p>
+{% endblock %}

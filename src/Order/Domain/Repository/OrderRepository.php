@@ -20,4 +20,9 @@ interface OrderRepository extends Repository
      * @throws OrderNotFound
      */
     public function get(OrderId $id): Order;
+
+    /**
+     * @return Order[]
+     */
+    public function search(int $pageNumber, int $itemsPerPage): array;
 }

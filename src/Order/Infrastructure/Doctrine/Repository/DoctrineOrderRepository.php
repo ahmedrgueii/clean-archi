@@ -10,6 +10,7 @@ use App\Order\Domain\Exception\OrderNotFoundWithId;
 use App\Order\Domain\Repository\OrderRepository;
 use App\Order\Domain\ValueObject\OrderId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\OrderBy;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,5 +40,17 @@ final class DoctrineOrderRepository extends ServiceEntityRepository implements O
         }
 
         return $order;
+    }
+
+    public function search(int $pageNumber, int $itemsPerPage): array
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->setFirstResult(($pageNumber - 1) * $itemsPerPage)
+            ->setMaxResults($itemsPerPage)
+            ->orderBy(new OrderBy('o.createdAt', 'DESC'));
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }
