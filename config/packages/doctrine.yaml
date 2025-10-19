@@ -8,6 +8,7 @@ doctrine:
             firstname: App\Common\Infrastructure\Doctrine\Type\FirstNameType
             lastname: App\Common\Infrastructure\Doctrine\Type\LastNameType
             email: App\Common\Infrastructure\Doctrine\Type\EmailType
+            money: App\Common\Infrastructure\Doctrine\Type\MoneyType
 
             # Authentication
             username: App\Authentication\Infrastructure\Doctrine\Type\UsernameType
@@ -16,6 +17,18 @@ doctrine:
             # User
             user_id: App\User\Infrastructure\Doctrine\Type\UserIdType
             user_status: App\User\Infrastructure\Doctrine\Type\UserStatusType
+
+            # Product
+            product_id: App\Product\Infrastructure\Doctrine\Type\ProductIdType
+            product_name: App\Product\Infrastructure\Doctrine\Type\ProductNameType
+            product_description: App\Product\Infrastructure\Doctrine\Type\ProductDescriptionType
+            stock: App\Product\Infrastructure\Doctrine\Type\StockType
+
+            # Order
+            order_id: App\Order\Infrastructure\Doctrine\Type\OrderIdType
+            order_item_id: App\Order\Infrastructure\Doctrine\Type\OrderItemIdType
+            order_status: App\Order\Infrastructure\Doctrine\Type\OrderStatusType
+            quantity: App\Order\Infrastructure\Doctrine\Type\QuantityType
 
             # Messaging
             conversation_id: App\Messaging\Infrastructure\Doctrine\Type\ConversationIdType
@@ -46,3 +59,15 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/src/Messaging/Infrastructure/Doctrine/Mapping'
                 prefix: 'App\Messaging\Domain\Entity'
+
+            Product:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Product/Infrastructure/Doctrine/Mapping'
+                prefix: 'App\Product\Domain\Entity'
+
+            Order:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Order/Infrastructure/Doctrine/Mapping'
+                prefix: 'App\Order\Domain\Entity'

@@ -11,6 +11,8 @@ api_platform:
             - '%kernel.project_dir%/src/Authentication/UserInterface/ApiPlatform/Payload/'
             - '%kernel.project_dir%/src/User/UserInterface/ApiPlatform/Resource/'
             - '%kernel.project_dir%/src/Messaging/UserInterface/ApiPlatform/Resource/'
+            - '%kernel.project_dir%/src/Order/UserInterface/ApiPlatform/Resource/'
+            - '%kernel.project_dir%/src/Product/UserInterface/ApiPlatform/Resource/'
     patch_formats:
         json:
             - 'application/merge-patch+json'

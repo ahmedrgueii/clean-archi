@@ -26,7 +26,13 @@ final class TokenService implements TokenDecoder, TokenEncoder
 
     private function getPublicKey(): \OpenSSLAsymmetricKey
     {
-        return openssl_pkey_get_public('file://' . $this->jwtPublicKey);
+        $publicKey = openssl_pkey_get_public(file_get_contents($this->jwtPublicKey));
+
+        if ($publicKey === false) {
+            throw new \RuntimeException(sprintf('Unable to load public key from path "%s"', $this->jwtPublicKey));
+        }
+
+        return $publicKey;
     }
 
     public function encode(array $payload): string
@@ -36,6 +42,12 @@ final class TokenService implements TokenDecoder, TokenEncoder
 
     private function getPrivateKey(): \OpenSSLAsymmetricKey
     {
-        return openssl_pkey_get_private('file://' . $this->jwtPrivateKey);
+        $privateKey = openssl_pkey_get_private(file_get_contents($this->jwtPrivateKey));
+
+        if ($privateKey === false) {
+            throw new \RuntimeException(sprintf('Unable to load private key from path "%s"', $this->jwtPrivateKey));
+        }
+
+        return $privateKey;
     }
 }
