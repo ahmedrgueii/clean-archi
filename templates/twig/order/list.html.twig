@@ -1,0 +1,36 @@
+{% extends 'twig/base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+    <h1>Orders</h1>
+
+    <p>
+        <a href="{{ path('app_order_processor_create') }}">Place an order</a>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Identifier</th>
+                <th>Status</th>
+                <th>Created at</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td><a href="{{ path('app_order_provider', {orderId: order.id}) }}">{{ order.id }}</a></td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.createdAt }}</td>
+                <td>{{ order.totalAmount / 100 }} {{ order.totalCurrency }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No orders found.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

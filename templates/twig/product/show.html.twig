@@ -1,0 +1,25 @@
+{% extends 'twig/base.html.twig' %}
+
+{% block title %}Product {{ product.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ product.name }}</h1>
+
+    <dl>
+        <dt>Identifier</dt>
+        <dd>{{ product.id }}</dd>
+
+        <dt>Description</dt>
+        <dd>{{ product.description ?? 'No description' }}</dd>
+
+        <dt>Price</dt>
+        <dd>{{ product.priceAmount / 100 }} {{ product.priceCurrency }}</dd>
+
+        <dt>Stock</dt>
+        <dd>{{ product.stock }}</dd>
+    </dl>
+
+    <p>
+        <a href="{{ path('app_products_provider') }}">Back to list</a>
+    </p>
+{% endblock %}
