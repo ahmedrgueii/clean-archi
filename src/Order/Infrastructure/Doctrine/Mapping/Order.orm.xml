@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Order\Domain\Entity\Order" table="orders">
+        <id name="id" type="order_id" column="id" />
+
+        <field name="status" type="order_status" column="status" nullable="false" />
+        <field name="createdAt" type="datetime" column="created_at" nullable="false" />
+        <field name="total" type="money" column="total" nullable="false" />
+
+        <one-to-many field="items"
+                     target-entity="App\Order\Domain\Entity\OrderItem"
+                     mapped-by="order"
+                     orphan-removal="true">
+            <cascade>
+                <cascade-persist />
+            </cascade>
+            <order-by>
+                <order-by-field name="id" direction="ASC" />
+            </order-by>
+        </one-to-many>
+    </entity>
+
+    <entity name="App\Order\Domain\Entity\OrderItem" table="order_items">
+        <id name="id" type="order_item_id" column="id" />
+
+        <many-to-one field="order" target-entity="App\Order\Domain\Entity\Order" inversed-by="items">
+            <join-column name="order_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+        </many-to-one>
+
+        <field name="productId" type="product_id" column="product_id" nullable="false" />
+        <field name="productName" type="product_name" column="product_name" nullable="false" />
+        <field name="unitPrice" type="money" column="unit_price" nullable="false" />
+        <field name="quantity" type="quantity" column="quantity" nullable="false" />
+        <field name="subtotal" type="money" column="subtotal" nullable="false" />
+
+        <indexes>
+            <index name="order_items_order_idx" columns="order_id" />
+        </indexes>
+    </entity>
+</doctrine-mapping>

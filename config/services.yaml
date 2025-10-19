@@ -51,3 +51,15 @@ services:
     ################################
     App\Messaging\:
         resource: '%kernel.project_dir%/src/Messaging/'
+
+    ######
+    # Product
+    ################################
+    App\Product\:
+        resource: '%kernel.project_dir%/src/Product/'
+
+    ######
+    # Order
+    ################################
+    App\Order\:
+        resource: '%kernel.project_dir%/src/Order/'
